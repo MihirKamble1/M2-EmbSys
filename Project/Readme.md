@@ -12,7 +12,7 @@ It is a smart home system, As we know world is going digital and automated it is
 * 3 Block diagram and explanation
 * 4 Components
 * 5 Flow chart and Behavioural Diagram
-* 6 Test Plan
+* 6 Future Scope
 * 7 Application
 # 1. About Smart Home
  * Description
@@ -23,7 +23,23 @@ It is a smart home system, As we know world is going digital and automated it is
   
     User will be able to access the appliances using bluetooth and also with the help of sensors and configured by the user the appliances will act accordingly even if user input is not given at that time.
 
- * SWOT Analysis
+ * SWOT Analysis :
+  
+  * Strength:
+
+    The major strength of this project is that it is easy to operate and the sensors are well calibrated with the microcontroller which leads to efficint work.
+
+  * Weakness:
+
+    The weakness of this project is that the motion sensor used does not recognize who the person is standing infront of the motion sensor.
+
+    Another weakness of this project is if the person is not feeling well and does not need the AC to turn on there is no way that the microcontroller will know about this and will result in turning on the AC even though the person or user is not well.
+  * Opportunities:
+
+    It can be used to build an ecosystem in a house where you dont need to worry abot the electricity and and any other things it controller will take care of it.
+  * Threats:
+
+    As it does not recognizes the person it is the biggest threats.
   * 5Ws & 1 H
    * Who :
 
@@ -145,4 +161,10 @@ The Block Diagram explains the various components, sensors, relays and ADC used 
  * Behavioural Diagram of embedded system 
 
     ![](2022-02-26-03-32-23.png)
+
+# Future Scope
+
+ As there are many flaws in this project, if the person is not feeling well it will still turn on the AC so this issue must be sorted, Another issue is it will try and recognize the person who is standing infront of it.
+
+ The other development will be adding more appliances to the ecosystem for now it is only light, Fan and AC but as we go on in this project i will add many more appliances to the system and it will make the project truely smart home.
  
