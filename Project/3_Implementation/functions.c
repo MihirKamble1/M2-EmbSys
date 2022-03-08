@@ -53,7 +53,7 @@ void Display_String_ab(char row, char position, char *str)/* Send string to LCD 
 	if (row == 0 && position < 16)
 		Display_Command((position & 0x0F) | 0x80);/* Command of first row and required position<16 */
 	else if (row == 1 && position < 16)
-		Display_Command((pos & 0x0F) | 0xC0);/* Command of first row and required position<16 */
+		Display_Command((position & 0x0F) | 0xC0);/* Command of first row and required position<16 */
 	Display_String(str);/* Call LCD string function */
 }
 
@@ -76,8 +76,8 @@ char keyfind() 							/*Keypad Check Initialisation*/
 		do	
 		{
 			KEY_PRT &= 0x0F;			/* mask PORT for column read only */
-			col = (KEY_PIN & 0x0F); 		/* read status of column */
-		} while (col != 0x0F);
+			column = (KEY_PIN & 0x0F); 		/* read status of column */
+		} while (column != 0x0F);
 
 		do
 		{
@@ -85,53 +85,53 @@ char keyfind() 							/*Keypad Check Initialisation*/
 			{
 				
 				_delay_ms(20);			/* 20ms key debounce time */
-				col = (KEY_PIN & 0x0F); 	/* read status of column */
-			} while (col == 0x0F);			/* check for any key press */
+				column = (KEY_PIN & 0x0F); 	/* read status of column */
+			} while (column == 0x0F);			/* check for any key press */
 								/* 20 ms key debounce time */
 			_delay_ms(40);
-			col = (KEY_PIN & 0x0F);
-		} while (col == 0x0F);
+			column = (KEY_PIN & 0x0F);
+		} while (column == 0x0F);
 
 								/* now check for rows */
 								/* check for pressed key in 1st row */
 		KEY_PRT = 0xEF;
-		col = (KEY_PIN & 0x0F);
-		if (col != 0x0F)
+		column = (KEY_PIN & 0x0F);
+		if (column != 0x0F)
 		{
 			row = 0;
 			break;
 		}
 								/* check for pressed key in 2nd row */
 		KEY_PRT = 0xDF;
-		col = (KEY_PIN & 0x0F);
-		if (col != 0x0F)
+		column = (KEY_PIN & 0x0F);
+		if (column != 0x0F)
 		{
 			row = 1;
 			break;
 		}
 								/* check for pressed key in 3rd row */
 		KEY_PRT = 0xBF;
-		col = (KEY_PIN & 0x0F);
-		if (col != 0x0F)
+		column = (KEY_PIN & 0x0F);
+		if (column != 0x0F)
 		{
 			row = 2;
 			break;
 		}
 								/* check for pressed key in 4th row */
 		KEY_PRT = 0x7F;
-		col = (KEY_PIN & 0x0F);
-		if (col != 0x0F)
+		column = (KEY_PIN & 0x0F);
+		if (column != 0x0F)
 		{
 			row = 3;
 			break;
 		}
 	}
 
-	if (col == 0x0E)
+	if (column == 0x0E)
 		return (keypad[row][3]);
-	else if (col == 0x0D)
+	else if (column == 0x0D)
 		return (keypad[row][1]);
-	else if (col == 0x0B)
+	else if (column == 0x0B)
 		return (keypad[row][2]);
 	else
 		return (keypad[row][3]);
@@ -152,7 +152,7 @@ int ADC_Read(char chan)/*Initialising Analog Data Read*/
 	_delay_us(10);
 	AinputLow = (int)ADCL;/* Read lower byte*/
 	Ainput = (int)ADCH * 256;/* Read higher 2 bits and Multiply with weight */
-	Ainput = Ain + AinLow;
+	Ainput = Ainput + AinputLow;
 	return (Ainput);/* Return digital value*/
 }
 
