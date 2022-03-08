@@ -1,5 +1,5 @@
 MAIN_APP = SmartHome
-MAIN_HEX_PATH = F:\temp\M2-EmbSys\Project\3_Implementation\$(MAIN_APP).hex
+MAIN_HEX_PATH = F:\Workspace\M2-EmbSys\Project\3_Implementation\$(MAIN_APP).hex
 
 ifdef OS
    RM = del /q
