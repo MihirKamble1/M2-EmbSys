@@ -1,14 +1,14 @@
 #include "SmartHome.h"
 int main(void)
 {
-	int c1 = 0, c2 = 0, c3 = 0, result = 0, value, flag1 = 0;
+	int val = 0, value, flag1 = 0,start=0;
 	char string;
 	Display_Init(); /*LCD Initialisation*/
 up:
-	res = password(arr);
-	if (res == 1)
-	{ /*Gives access to Keypad if password matches*/
-		LCD_Clear();
+	start = 1;
+	if (start == 1)
+	{ 
+		Display_Clear();
 		DDRC = 0xFF;
 		while (1)
 		{
@@ -31,11 +31,11 @@ up:
 
 				PORTC ^= (1 << 2);
 			}
-			else if (result == '6')/*Air Conditioner Control*/
+			else if (result == '4')/*Air Conditioner Control*/
 			{
 				PORTC ^= (1 << 6);
 			}
-			else if (result == '9')/*Room Temperature Display*/
+			else if (result == '5')/*Room Temperature Display*/
 			{
 				char String[5];
 				int value;
@@ -57,9 +57,7 @@ up:
 			else if (result == '*')
 			{ 
 				if (PORTC & (1 << 2))
-					count1++;
 				if (PORTC & (1 << 6))
-					count2++;
 				Display_Clear();
 				Display_Char('l');
 				Display_Char('i');
@@ -68,53 +66,22 @@ up:
 				Display_Char('t');
 				Display_Char('o');
 				Display_Char('n');
-				Display_Char(':');
-				char charvalue = count1 + '0';/*Converts int value into char but only happens for 0-9*/
-				Display_Char(charvalue);
-				_delay_ms(2500);
-				_Clear(); 				/* Clearing LCD */
-				Display_Char('F');
-				Display_Char('a');
-				Display_Char('n');
-				Display_Char('o');
-				Display_Char('n');
-				Display_Char(':');
-				char charvalue1 = count2 + '0';
-				Display_Char(charvalue1);
-				c2 = 0;
-				c3 = 0;
-				_delay_ms(2000);
-				Display_Clear();/* Clearing Display */
-				Display_String_xy(0, 1, "Press a key");	/* Send string to LCD with xy position */
+				_delay_ms(3000);
+				_Clear(); 				/* Clearing Display */
+				Display_Char('A');
+				Display_Char('C');
+                Display_Char('O');
+                Display_Char('N');
+                _Clear();
+				Display_String_ab(0, 1, "Press a key");	/* Send string to Display with ab position */
 			}
-			else if (result == '0') 			/*Password Reset*/
-			{
-				int result = 0;
-				result = password(arr);
-				if (result == 1)
-				{
-					LCD_Clear();
-					LCD_Init();
-					LCD_String("Resetpwd:");
-					for (int i = 0; i < 4; i++)
-					{
-						int res1 = keyfind();
-						arr[i] = res1;
-						LCD_Char(res1);
-					}
-					LCD_Clear();
-				}
-			}
+			
 			else if (result == '#') 			/*Microcontroller Reset*/
 			{
 				PORTC = (0 << 0);
 				PORTC = (0 << 1);
 				PORTC = (0 << 2);
-				PORTC = (0 << 3);
-				PORTC = (0 << 4);
 				PORTC = (0 << 6);
-				PORTB = (0 << 1);
-				PORTB = (0 << 2);
 
 				goto up;
 			}

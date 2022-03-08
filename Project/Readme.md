@@ -82,7 +82,7 @@ It is a smart home system, As we know world is going digital and automated it is
 # 3. Block Diagram
  * Block diagram of the Smart Home Embedded System
    
-   ![](2022-02-26-04-34-04.png)
+   ![](2022-03-08-22-51-32.png)
 
 The Block Diagram explains the various components, sensors, relays and ADC used to construct the Smart Home embedded system and the way it is connected to microcontroller.
 * Explanation 
